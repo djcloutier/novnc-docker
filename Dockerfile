@@ -18,8 +18,7 @@ RUN ng build --prod
 WORKDIR /build
 RUN git clone --branch v1.3.0 https://github.com/novnc/noVNC.git novnc
 WORKDIR /build/novnc
-RUN npm install
-RUN node ./utils/use_require.js --as:commonjs -with-app 
+RUN npm install && ./utils/use_require.js --as commonjs --with-app 
 
 FROM --platform=$TARGETPLATFORM alpine:3.12 as runtime
 
