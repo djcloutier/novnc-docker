@@ -18,6 +18,7 @@ RUN ng build --prod
 WORKDIR /build
 RUN git clone --branch v1.3.0 https://github.com/novnc/noVNC.git novnc
 WORKDIR /build/novnc
+RUN npm i --package-lock-only
 RUN npm audit fix
 RUN npm install && ./utils/use_require.js --as commonjs --with-app
 
