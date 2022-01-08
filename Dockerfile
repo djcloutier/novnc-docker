@@ -20,7 +20,7 @@ FROM --platform=$TARGETPLATFORM alpine:3.12 as runtime
 LABEL maintainer.name="Dave Cloutier" maintainer.email="djcloutier@gmail.com"
 
 RUN mkdir -p /app/client
-RUN git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/ && rm -rf /build/noVNC/.git && apk del git
+RUN apk add git && git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/ && rm -rf /build/noVNC/.git && apk del git
 COPY --from=server /build/novnc-manager /app/novnc-manager
 COPY --from=client /build/client/dist/client /app/client/
 
