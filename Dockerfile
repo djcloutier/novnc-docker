@@ -16,10 +16,12 @@ RUN npm install
 RUN ng build --prod
 
 WORKDIR /build
-RUN git clone --branch v1.3.0 https://github.com/novnc/noVNC.git novnc
-WORKDIR /build/novnc
-RUN npm install && ./utils/use_require.js --as commonjs --with-app 
-
+RUN
+    # Install noVNC
+    git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/build &&
+    rm -rf /build/noVNC/build.git &&
+    apk del git && \
+    sed -i -- "s/ps -p/ps -o pid | grep/g" /build/noVNC/build/utils/launch.sh
 FROM --platform=$TARGETPLATFORM alpine:3.12 as runtime
 
 LABEL maintainer.name="Aitor González Fernández" maintainer.email="info@aitorgf.com"
