@@ -16,7 +16,7 @@ RUN npm install
 RUN ng build --prod
 
 WORKDIR /build
-RUN
+RUN \
     # Install noVNC
     git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/build &&
     rm -rf /build/noVNC/build.git &&
