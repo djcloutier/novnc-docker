@@ -17,7 +17,7 @@ RUN ng build --prod
 
 WORKDIR /build
     # Install noVNC
-RUN git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/build && rm -rf /build/noVNC/build.git && apk del git && sed -i -- "s/ps -p/ps -o pid | grep/g" /build/noVNC/build/utils/launch.sh
+RUN git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/build && rm -rf /build/noVNC/build.git && apk del git
 FROM --platform=$TARGETPLATFORM alpine:3.12 as runtime
 
 LABEL maintainer.name="Aitor González Fernández" maintainer.email="info@aitorgf.com"
