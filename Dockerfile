@@ -16,7 +16,7 @@ RUN npm install
 RUN ng build --prod
 
 WORKDIR /build
-RUN git clone --branch v1.2.0 https://github.com/novnc/noVNC.git novnc
+RUN git clone --single-branch https://github.com/novnc/noVNC.git novnc
 WORKDIR /build/novnc
 RUN npm install && ./utils/use_require.js --with-app --as commonjs
 
