@@ -16,8 +16,7 @@ RUN npm install
 RUN ng build --prod
 
 WORKDIR /build
-    # Install noVNC
-RUN git clone --depth 1 https://github.com/novnc/noVNC.git /build/noVNC/build && rm -rf /build/noVNC/build.git && apk del git
+RUN git clone --depth 1 https://github.com/novnc/noVNC.git /app/noVNC/ && rm -rf /app/noVNC/.git && apk del git
 FROM --platform=$TARGETPLATFORM alpine:3.12 as runtime
 
 LABEL maintainer.name="Aitor González Fernández" maintainer.email="info@aitorgf.com"
@@ -25,7 +24,6 @@ LABEL maintainer.name="Aitor González Fernández" maintainer.email="info@aitorg
 RUN mkdir -p /app/novnc && mkdir -p /app/client
 COPY --from=server /build/novnc-manager /app/novnc-manager
 COPY --from=client /build/client/dist/client /app/client/
-COPY --from=client /build/novnc/build /app/novnc/
 
 WORKDIR /app
 EXPOSE 8084
